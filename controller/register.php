@@ -9,8 +9,17 @@ $password = $user->getPassword();
 
 $pdo = Connect();
 
-Insert($email, $password, $pdo);
+Insert($email, $user->hashPassword($password), $pdo);
 
-header('Location: https://google.com');
+$error = $user->getError();
+
+
+if (count($error) >= 1) {
+    header("Location: http://localhost:3000/register.php?error=".$error[0]);
+} else {
+
+    header('Location: http://localhost:3000');
+}
+
 
 ?>

@@ -47,6 +47,20 @@ function Insert($email, $password, $pdo) {
     }
 }
 
+function FindBy2($pdo, $id, $champs, $table, $element) {
+    try {
+        $sql = "SELECT $element FROM $table WHERE $champs = ?";
+
+        $stmt = $pdo->prepare($sql);
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+
 
 function FindBy($pdo, $id) {
     try {

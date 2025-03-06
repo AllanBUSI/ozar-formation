@@ -22,18 +22,37 @@ class User {
 
     public function setEmail($email) {
         $verif = $this->validateEmail($email);
+
+        $emailSQL = $this->verifyEmail($email);
+
+        if ($emailSQL == true) {
+            return $this->setError("L'email existe déjà");
+        }
+
         if ($verif == false) {
             return $this->setError("L'email est invalide");
         }
+
         $this->email = $email;
         return $this->email;
     }
+
+    public function verifyEmail($email) {
+        $pdo = Connect();
+        $value = FindBy2($pdo, $email, "email", "user", "*");
+
+        if (count($value) >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public function setPassword($password) {
         if (strlen($password) <= 8) {
             return $this->setError("Le mot de passe est trop petit");
         }
-        $password = $this->hashPassword($password);
         $this->password = $password;
         return $this->password;
     }
@@ -46,7 +65,7 @@ class User {
         return array_push($this->error,$error);
     }
 
-    private function hashPassword($password) {
+    public function hashPassword($password) {
         return password_hash($password, PASSWORD_ARGON2ID);
     }
 

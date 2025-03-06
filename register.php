@@ -1,27 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<?php
+require 'components/header.php';
+?>
 
-    <style>
-        div.form {
-            padding: 5%;
-            border: 1px solid black;
-        }
-    </style>
-
-</head>
-<body>
-    <div class="form">
-        <form action="/controller/register.php" method="post">
-            <input name="email" type="email" placeholder="Email">
-            <br/>
-            <input name="password" type="password" placeholder="Mot de passe">
-            <br/>
-            <input type="submit" value="Valider">
-        </form>
+<div class="container">
+    <div class="row">
+        <?php
+        if (isset($_GET['error'])):
+        ?>
+            <div class="alert alert-danger alert-dismissible fade show" data-bs-dismiss="3000" role="alert">
+                <strong>Erreur!</strong> <?= $_GET['error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php
+        endif;
+        ?>
+        <div class="col-md-8">
+            <form action="/controller/register.php" method="post">
+                <input name="email" type="email" placeholder="Email">
+                <br />
+                <input name="password" type="password" placeholder="Mot de passe">
+                <br />
+                <input type="submit" value="Valider">
+            </form>
+        </div>
     </div>
-</body>
-</html>
+</div>
+
+
+
+<?php
+require 'components/footer.php';
+?>
