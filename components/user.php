@@ -69,6 +69,14 @@ class User {
         return password_hash($password, PASSWORD_ARGON2ID);
     }
 
+    public static function verifyPassword($hash, $password) {
+        if (password_verify($password, $hash)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private function validateEmail($email) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
