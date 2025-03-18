@@ -27,10 +27,15 @@
           <a class="nav-link disabled" aria-disabled="true">Disabled</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <?php if (!isset($_SESSION['email'])): ?>
+        <div class="row">
+          <button class="col-md-6 btn btn-warning">Login</button>
+          <button class="col-md-6 btn btn-danger">Register</button>
+        </div>
+      <?php endif ?>
+      <?php if (isset($_SESSION['email'])): ?>
+        <button class="btn btn-success"><?= $_SESSION['email']; ?></button>
+      <?php endif ?>
     </div>
   </div>
 </nav>

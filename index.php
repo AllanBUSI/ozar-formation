@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require "./components/header.php";
 require "./components/navbar.php";
 require "./components/database.php";

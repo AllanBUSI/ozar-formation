@@ -1,4 +1,5 @@
 <?php 
+session_start();
 
 require '../components/user.php';
 require '../components/database.php';
@@ -13,6 +14,7 @@ if (count($value) == 0) {
     header("Location: http://localhost:3000/login.php?error=cette utilisateur n'existe pas");
 } else {
     if (User::verifyPassword($value[0]['password'], $_POST['password'])) {
+        $_SESSION["email"] = $value[0]['email'];
         header("Location: http://localhost:3000/");
     } else {
         header("Location: http://localhost:3000/login.php?error=Le mot de passe est incorrete");
