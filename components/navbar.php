@@ -29,8 +29,8 @@
       </ul>
       <?php if (!isset($_SESSION['email'])): ?>
         <div class="row">
-          <button class="col-md-6 btn btn-warning">Login</button>
-          <button class="col-md-6 btn btn-danger">Register</button>
+          <a href="/login.php" class="col-md-6 btn btn-warning">Login</a>
+          <a href="/register.php" class="col-md-6 btn btn-danger">Register</a>
         </div>
       <?php endif ?>
       <?php if (isset($_SESSION['email'])): ?>
